@@ -18,6 +18,8 @@ Module Lecture1.
   Lemma Proj1B {A B:Prop} : A /\ B -> A.
 
 
+  (* Use `Locate`, `Check`, and `Print` to figure out
+     how <-> works. Start with `Locate "_ <-> _".` *)
   Lemma ObjectivismB {A:Prop} : A <-> A.
 
   Definition Objectivism {A:Prop} : A <-> A.
