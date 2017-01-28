@@ -27,7 +27,7 @@ Module Pset1Bnat.
       | [H : context[?a + ?a = ?b + ?b] |- _] => rewrite double_eq in H
       | [ |- context[?a + ?a = ?b + ?b] ] => rewrite double_eq
       | [H : context[S _ = S _] |- _] => apply eq_add_S in H
-      | [ |- context[S _ = S _] ] => apply eq_add_S
+      | [ |- context[S _ = S _] ] => apply eq_S
     end.
 
 
@@ -141,4 +141,4 @@ Module Pset1Bnat.
   Proof.
   Abort.
 
-End Pset1Nat.
+End Pset1Bnat.
