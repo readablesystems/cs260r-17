@@ -4,25 +4,21 @@ Naïve Coq
 Overview
 --------
 
-| ** WHEN YOU WANT **                     | ** USE **  |
+| WHEN YOU WANT                           | USE        |
 | --------------------------------------- | ---------- |
 | simple case analysis                    | `destruct` |
 | smart case analysis on complex objects  | `inversion` |
 | inductive case analysis                 | `induction` |
 | a more general inductive hypothesis     | `generalize; induction` |
 | inductive case analysis on a `Function` body | `functional induction` |
-| --------------------------------------- | ----------- |
 | Coq to do something obvious             | `auto`, `omega` |
 | to expand a function body               | `simpl`, `unfold` |
 | to expand a `Function` body             | `rewrite [functionname]_equation` |
 | to rewrite using equality               | `rewrite H` |
-| --------------------------------------- | --------------- |
 | an obvious contradiction    | `contradiction` |
 | a contradictory equality    | `discriminate`  |
-| --------------------------------------- | --------------- |
 | to go from a theorem’s conclusion to its premise | `apply`         |
 | to go from a theorem’s premise to its conclusion | `apply in H`    |
-| --------------------------------------- | ---------------- |
 | a new hypothesis                        | `pose`, `assert` |
 | a new name for an expression            | `remember`       |
 
