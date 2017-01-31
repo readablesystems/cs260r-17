@@ -1,6 +1,10 @@
 Naïve Coq
 =========
 
+* **[Coq](https://coq.inria.fr/)**
+* [Tactic index](https://coq.inria.fr/distrib/current/refman/tactic-index.html)
+* [Talkin’ with the Rooster (Coq FAQ)](https://coq.inria.fr/faq#htoc52)
+
 Overview
 --------
 
