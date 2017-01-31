@@ -7,20 +7,27 @@ Overview
 | WHEN YOU WANT                           | USE        |
 | --------------------------------------- | ---------- |
 | simple case analysis                    | `destruct` |
-| smart case analysis on complex objects  | `inversion` |
+| smart case analysis on complex objects  | `inversion_clear` |
 | inductive case analysis                 | `induction` |
+| simultaneous induction                  | `induction x, y` |
 | a more general inductive hypothesis     | `generalize; induction` |
 | inductive case analysis on a `Function` body | `functional induction` |
 | Coq to do something obvious             | `auto`, `omega` |
 | to expand a function body               | `simpl`, `unfold` |
 | to expand a `Function` body             | `rewrite [functionname]_equation` |
 | to rewrite using equality               | `rewrite H` |
-| an obvious contradiction    | `contradiction` |
-| a contradictory equality    | `discriminate`  |
+| an obvious contradiction                | `contradiction` |
+| a contradiction about different constructors     | `discriminate`  |
 | to go from a theorem’s conclusion to its premise | `apply`         |
 | to go from a theorem’s premise to its conclusion | `apply in H`    |
 | a new hypothesis                        | `pose`, `assert` |
 | a new name for an expression            | `remember`       |
+| to work with `A /\ B`                   | `split` (goal), `destruct` (hypothesis) |
+| to work with `A \/ B`                   | `left`, `right` (goal), `destruct` (hypothesis) |
+| to show `exists x, P`                   | `exists p`       |
+| the same thing in every subgoal         | `tactic1; tactic2` |
+| different things in diffent subgoals    | `[ tactic1 | tactic2 | ... ]` |
+| suppressed tactic errors                | `...; try tactic; ...` |
 
 
 Introduction tactics: adding hypotheses
