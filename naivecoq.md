@@ -27,7 +27,7 @@ Overview
 | to show `exists x, P`                   | `exists p`       |
 | the same thing in every subgoal         | `tactic1; tactic2` |
 | different things in diffent subgoals    | `[ tactic1 | tactic2 | ... ]` |
-| suppressed tactic errors                | `...; try tactic; ...` |
+| suppressed errors                       | `...; try tactic; ...` |
 
 
 Introduction tactics: adding hypotheses
