@@ -344,11 +344,10 @@ functionname in *`.
 ### `rewrite <Functionname>_equation in *`
 
 The `simpl` and `unfold` tactics may not work well on recursive functions
-defined by `Function`. First make sure you defined your `Function` with
-`Defined`, rather than `Qed` (`Defined` allows Coq to look inside the
-function’s definition; `Qed` does not). But if you still have trouble, use
-`rewrite <Functionname>_equation` to rewrites a function call with the
-function’s body.
+defined by `Function`. First make sure you closed your `Function` with
+`Defined`, rather than `Qed` (`Qed` seals the function’s definition so Coq
+can’t look inside it). But if you still have trouble, use `rewrite
+<Functionname>_equation` to rewrites a function call with the function’s body.
 
 
 Tactics that use equivalence
