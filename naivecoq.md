@@ -11,7 +11,7 @@ Overview
 | WHEN YOU WANT                           | USE        |
 | --------------------------------------- | ---------- |
 | simple case analysis                    | `destruct` |
-| smart case analysis on complex objects  | `inversion_clear` |
+| smart case analysis on complex objects  | `inversion`, `inversion_clear` |
 | inductive case analysis                 | `induction` |
 | simultaneous induction                  | `induction x, y` |
 | a more general inductive hypothesis     | `generalize; induction` |
@@ -341,10 +341,13 @@ Replace a function call with the function’s body. Use `unfold functionname` or
 Replace a function’s body with a call. This is the inverse of `unfold
 functionname in *`.
 
-### `rewrite <functionname>_equation in *`
+### `rewrite <Functionname>_equation in *`
 
-The `simpl` and `unfold` tactics don’t work well on recursive functions
-defined by `Function`. Use this instead; it rewrites a function call with the
+The `simpl` and `unfold` tactics may not work well on recursive functions
+defined by `Function`. First make sure you defined your `Function` with
+`Defined`, rather than `Qed` (`Defined` allows Coq to look inside the
+function’s definition; `Qed` does not). But if you still have trouble, use
+`rewrite <Functionname>_equation` to rewrites a function call with the
 function’s body.
 
 
