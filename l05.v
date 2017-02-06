@@ -20,13 +20,14 @@ Section Lecture5.
   Print app.
 
   (* Let's prove our own list fact. *)
-  Lemma in_middle: forall (a:A) xs1 xs2, In a (xs1 ++ a :: xs2).
+  Lemma in_middle: forall (a:A) xs1 xs2,
+    In a (xs1 ++ a :: xs2).
   Admitted.
 
 
-  (* Now, write an inductive Prop `Dec`, with a single `list A` argument,
-     where `Dec l` is true iff the elements of `l` are in decreasing order
-     by `LE`. *)
+  (* Now, write an inductive Prop `Dec`, with a single
+     `list A` argument, where `Dec l` is true iff the
+     elements of `l` are in decreasing order by `LE`. *)
 
 
   (* Do it again. *)
