@@ -10,11 +10,12 @@ Overview
 
 | WHEN YOU WANT                           | USE        |
 | --------------------------------------- | ---------- |
+| to forget a hypothesis                  | `clear`    |
 | simple case analysis                    | `destruct` |
-| smart case analysis on complex objects  | `inversion_clear` |
+| smart case analysis on complex objects  | `inversion` |
 | inductive case analysis                 | `induction` |
 | simultaneous induction                  | `induction x, y` |
-| a more general inductive hypothesis     | `generalize; induction` |
+| a more general inductive hypothesis     | `generalize` or `revert` |
 | inductive case analysis on a `Function` body | `functional induction` |
 | Coq to do something obvious             | `auto`, `omega` |
 | to expand a function body               | `simpl`, `unfold` |
@@ -29,6 +30,7 @@ Overview
 | to work with `A /\ B`                   | `split` (goal), `destruct` (hypothesis) |
 | to work with `A \/ B`                   | `left`, `right` (goal), `destruct` (hypothesis) |
 | to show `exists x, P`                   | `exists p`       |
+| to create `x` from `exists x, P` hypothesis | `destruct`, `destruct_conjs` |
 | the same thing in every subgoal         | `tactic1; tactic2` |
 | different things in diffent subgoals    | `[ tactic1 | tactic2 | ... ]` |
 | suppressed errors                       | `...; try tactic; ...` |
@@ -186,8 +188,17 @@ they’re not, it can lose context. Use `remember` to avoid this.
 ### `generalize x`
 
 Replaces a goal that refers to a specific variable, `x`, with `forall x,
-[goal]`. Use this when applying an induction tactic gives you an inductive
-hypothesis that’s too specific.
+[goal]`. Use this before induction if applying an induction tactic gives you a
+too-specific inductive hypothesis.
+
+### `revert x`
+
+Acts like `generalize x`, but also removes references to `x` from the
+hypotheses.
+
+### `clear H`
+
+Clears a hypothesis.
 
 
 Applicative tactics
@@ -269,7 +280,7 @@ goals with two-constructor types. `left` applies the first constructor and
 `right` applies the second one. This can lose context, so make sure you pick
 the right one.
 
-### `exists`
+### `exists` (goal)
 
 `exists p` is typically used for existence goals (like `exists p, p = 5`), but
 works for all goals with single-constructor types. It applies the single
@@ -283,6 +294,13 @@ goal. If more than one constructor matches, `constructor` can lose context.
 Use `constructor N` to apply the `N`th constructor specifically. Use
 `constructor ... with (var:=value)` if the constructor can’t figure out values
 for some variables.
+
+### `destruct` for `exists` hypotheses
+
+A hypothesis like `H : exists x, P` says that *some* `x` exists. To find a
+*specific* `x` for which `P` holds, run `destruct H`. To simultaneously
+instantiate *all* `exists` hypotheses (and break down `/\` hypotheses into
+their components), run `destruct_conjs` (requires `Program.Tactics`).
 
 
 Completion tactics
