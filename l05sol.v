@@ -155,4 +155,4 @@ Section Lecture5.
 
   (* Left for later *)
 
-End Section.
+End Lecture5.

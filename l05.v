@@ -38,4 +38,4 @@ Section Lecture5.
 
   (* Now, prove a lemma about appending decreasing lists. *)
 
-End Section.
+End Lecture5.
