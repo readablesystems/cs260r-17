@@ -295,7 +295,11 @@ Section Pset2AlternatePermutation.
 
      Your definition can be either computational (e.g., a Function
      Fixpoint) or inductive, but it should differ substantially from
-     Coq’s. It’s recommended to start with an inductive definition. If
+     Coq’s. In particular, your definition should NOT assume
+     transitivity, the way Coq’s does. (Your equivalent of `perm_trans`
+     should be a lemma, not an inductive case.)
+
+     It’s recommended to start with an inductive definition. If
      you choose a computational definition, you’ll need the `eq_dec`
      hypothesis, which says that variables of type A can be
      distinguished. *)
