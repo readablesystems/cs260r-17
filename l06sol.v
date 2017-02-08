@@ -84,7 +84,7 @@ Section Lecture6.
     rewrite rev_unit. (* `rev (xs ++ [a]) = a :: rev xs` *)
     intros; inversion H; subst.
     apply Inc_app.
-    - apply IHxs; auto.
+    - auto. (* `auto` can apply inductive hypothesis *)
     - apply ICons; intros.
       + destruct H0.
       + auto.
@@ -105,13 +105,11 @@ Section Lecture6.
 
   Lemma Dec_rev' xs: Dec (rev xs) -> Inc xs.
     induction xs using rev_ind; auto.
-    rewrite rev_unit. (* `rev (xs ++ [a]) = a :: rev xs` *)
+    rewrite rev_unit.
     intros; inversion H; subst.
-    apply Inc_app.
-    - apply IHxs; auto.
-    - apply ICons; intros; auto.
-    - intros; destruct H1; auto.
-      apply in_rev in H0; subst; auto.
+    apply Inc_app; auto. (* !! *)
+    intros; destruct H1; auto.
+    apply in_rev in H0; subst; auto.
   Qed.
 
 End Lecture6.
