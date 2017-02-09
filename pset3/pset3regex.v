@@ -117,7 +117,7 @@ End StringFacts.
    a regex and a string, that holds iff the regex matches
    the string.
 
-   (This type *defines) the semantics of regular expressions,
+   (This type *defines* the semantics of regular expressions,
    so you can’t prove it correct---it just needs to match
    the expected semantics.) *)
 
