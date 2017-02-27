@@ -245,12 +245,15 @@ Inductive Z32 : Set :=
 | z32 : forall n:nat, n < 32 -> Z32.
 Hint Constructors Z32.
 
+Check proof_irrelevance.
+
 (* Two Z32s are equal iff their `nat` components are equal.
    The proof of this lemma uses classical logic. *)
 Lemma z32_proof_irrelevance n pf1 p pf2:
   n = p -> z32 n pf1 = z32 p pf2.
 
-  intros; subst.
+  intros.
+  subst.
   assert (pf1 = pf2) by (apply proof_irrelevance).
   subst; auto.
 Qed.
@@ -265,8 +268,31 @@ Definition z32_add: Z32 -> Z32 -> Z32.
   refine (fun x y => match (x, y) with
                      | (z32 n _, z32 p _) => z32 ((n + p) mod 32) _
                      end).
-  apply Nat.mod_upper_bound; discriminate.
+  apply Nat.mod_upper_bound.
+  discriminate.
 Defined.
+
+Definition z32_1 : Z32.
+  refine (z32 1 _).
+  omega.
+Defined.
+
+Definition z32_2 : Z32.
+  refine (z32 2 _).
+  omega.
+Defined.
+
+Definition z32_31 : Z32.
+  refine (z32 31 _).
+  omega.
+Defined.
+
+Definition z32_32 : Z32.
+  refine (z32 32 _).
+Abort.
+
+Eval compute in (z32_add z32_31 z32_1).
+Extraction z32_add.
 
 (* Addition on integers mod 32 is associative *)
 Lemma z32_add_assoc x y z:
