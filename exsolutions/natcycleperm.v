@@ -51,7 +51,7 @@ statement:
     NatCyclePerm is js.
 ]]
 
-That is, if [is] and [js] are distinct lists of [nat]s, and they are subsets
+That is, if [is] and [js] are lists of distinct [nat]s, and they are subsets
 of each other (every element of [is] is in [js] and vice versa), then there
 exists a cycle-based permutation between [is] and [js].
 
