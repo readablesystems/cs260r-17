@@ -33,7 +33,8 @@ for _distinct natural numbers_:
 Inductive NatCyclePerm : list nat -> list nat -> Prop :=
 | ncp_nil : NatCyclePerm [] []
 | ncp_cons : forall is js i,
-    NatCyclePerm is js -> ~ In i is ->
+    NatCyclePerm is js ->
+    ~ In i is ->
     NatCyclePerm (i::is) (i::js)
 | ncp_cycle : forall is js i,
     NatCyclePerm (i::is) js -> NatCyclePerm (is++[i]) js.
@@ -473,7 +474,8 @@ Section NatCyclePerm.
   Inductive NatCyclePerm : list nat -> list nat -> Prop :=
   | ncp_nil : NatCyclePerm [] []
   | ncp_cons : forall is js i,
-      NatCyclePerm is js -> ~ In i is ->
+      NatCyclePerm is js ->
+      ~ In i is ->
       NatCyclePerm (i::is) (i::js)
   | ncp_cycle : forall is js i,
       NatCyclePerm (i::is) js -> NatCyclePerm (is++[i]) js.
