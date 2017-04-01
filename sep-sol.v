@@ -398,6 +398,33 @@ Module Separation.
     refine (Assert (fun h' => Heap.Equal h h') _).
     unfold assertion_wf; intros; transitivity h1; auto.
   Defined.
+   
+  Definition weak_imp : assertion -> assertion -> weak_assertion :=
+    fun a1 a2 =>
+      fun h => asserts a1 h -> asserts a2 h.
+
+  Definition imp : assertion -> assertion -> assertion.
+    intros a1 a2.
+    refine (Assert (weak_imp a1 a2) _).
+    unfold assertion_wf. unfold weak_imp. intros.
+    rewrite H in *. auto.
+  Qed.
+
+  Definition weak_magic_wand : assertion -> assertion -> weak_assertion :=
+    fun a1 a2 =>
+      fun h => forall h', HeapP.Disjoint h h' -> asserts a1 h' ->
+                          asserts a2 (HeapP.update h h').
+
+  Definition magic_wand : assertion -> assertion -> assertion.
+    intros a1 a2.
+    refine (Assert (weak_magic_wand a1 a2) _).
+    unfold assertion_wf. unfold weak_magic_wand. intros.
+    assert (HeapP.Disjoint h1 h') by (now rewrite H).
+    apply (H0 _ H3) in H2.
+    assert (heap_Equal (HeapP.update h2 h') (HeapP.update h1 h'))
+      by (now rewrite H).
+    now rewrite H4.
+  Qed.
 
 
   Lemma emp_empty_heap:
