@@ -330,16 +330,6 @@ Module Separation.
       | Assert wa _ => wa h
       end.
 
-  Global Instance: Proper (eq ==> heap_Equal ==> iff) asserts.
-  Proof.
-    intros a1 a2 aeq h1 h2 heq.
-    subst; destruct a2.
-    unfold asserts; split; intros.
-    - now apply (wawf _ _ heq).
-    - symmetry in heq; now apply (wawf _ _ heq).
-  Qed.
-
-
   Definition assertion_imp : assertion -> assertion -> Prop :=
     fun a1 a2 =>
       forall h, asserts a1 h -> asserts a2 h.
@@ -351,6 +341,16 @@ Module Separation.
   Infix "===>" := assertion_imp (at level 90) : sep_scope.
   Infix "<===>" := assertion_iff (at level 90) : sep_scope.
   Local Open Scope sep_scope.
+
+  Global Instance: Proper (eq ==> heap_Equal ==> iff) asserts.
+  Proof.
+    intros a1 a2 aeq h1 h2 heq.
+    subst; destruct a2.
+    unfold asserts; split; intros.
+    - now apply (wawf _ _ heq).
+    - symmetry in heq; now apply (wawf _ _ heq).
+  Qed.
+
 
 
   Definition emp : assertion.
@@ -399,23 +399,29 @@ Module Separation.
     unfold assertion_wf; intros; transitivity h1; auto.
   Defined.
    
-  Definition weak_imp : assertion -> assertion -> weak_assertion :=
+  Definition weak_imp : assertion -> assertion ->
+                        weak_assertion :=
     fun a1 a2 =>
       fun h => asserts a1 h -> asserts a2 h.
 
-  Definition imp : assertion -> assertion -> assertion.
+  Definition imp : assertion -> assertion ->
+                   assertion.
     intros a1 a2.
     refine (Assert (weak_imp a1 a2) _).
     unfold assertion_wf. unfold weak_imp. intros.
     rewrite H in *. auto.
   Qed.
 
-  Definition weak_magic_wand : assertion -> assertion -> weak_assertion :=
+  Definition weak_magic_wand : assertion -> assertion ->
+                               weak_assertion :=
     fun a1 a2 =>
-      fun h => forall h', HeapP.Disjoint h h' -> asserts a1 h' ->
-                          asserts a2 (HeapP.update h h').
+      fun h =>
+        forall h', HeapP.Disjoint h h' ->
+                   asserts a1 h' ->
+                   asserts a2 (HeapP.update h h').
 
-  Definition magic_wand : assertion -> assertion -> assertion.
+  Definition magic_wand : assertion -> assertion ->
+                          assertion.
     intros a1 a2.
     refine (Assert (weak_magic_wand a1 a2) _).
     unfold assertion_wf. unfold weak_magic_wand. intros.
@@ -501,17 +507,18 @@ Module Separation.
   Qed.
 
   Lemma star_comm :
-    forall a1 a2, a1 ** a2 ===> a2 ** a1.
+    forall a1 a2, a1 ** a2 <===> a2 ** a1.
   Proof.
-    intros a1 a2 h I.
-    rewrite star_iff in *; destruct_conjs.
-    exists H, I; intuition.
-    now apply HeapX.Partition_sym.
+    intros a1 a2 h; split; intros I.
+    all: rewrite star_iff in *; destruct_conjs.
+    all: exists H, I; intuition.
+    all: now apply HeapX.Partition_sym.
   Qed.
 
   Lemma star_assoc :
     forall a1 a2 a3 h, asserts (a1 ** a2 ** a3) h <->
                        asserts ((a1 ** a2) ** a3) h.
+  Proof.
     split; intros.
     - destruct_star_in H; destruct_conjs.
       destruct_star_in H3; destruct_conjs.
