@@ -87,7 +87,7 @@ Section StringFacts.
   Qed.
 
   Lemma append_strlen_r s1 s2:
-    strlen s1 <= strlen (s1 ++ s2).
+    strlen s2 <= strlen (s1 ++ s2).
   Proof.
     induction s1; simpl; try rewrite IHs1; omega.
   Qed.
